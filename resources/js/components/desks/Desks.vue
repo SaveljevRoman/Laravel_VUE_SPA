@@ -4,13 +4,13 @@
         <div class="row">
             <div class="col-lg-4" v-for="desk in desks">
                 <div class="card mt-3">
-                    <a href="#" class="card-body">
-                        <h5 class="card-title">{{desk.name}}</h5>
-                    </a>
+                    <router-link class="card-body" :to="{name: 'showDesk', params: {deskId: desk.id}}">
+                        <h4 class="card-title">{{desk.name}}</h4>
+                    </router-link>
                 </div>
             </div>
         </div>
-        <div class="alert alert-danger" role="alert" v-if="errored">
+        <div class="alert alert-danger mt-3" role="alert" v-if="errored">
             Ошибка загрузки данных!
         </div>
         <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status" v-if="loading">
