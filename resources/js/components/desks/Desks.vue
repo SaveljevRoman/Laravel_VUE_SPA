@@ -4,9 +4,10 @@
         <div class="row">
             <div class="col-lg-4" v-for="desk in desks">
                 <div class="card mt-3">
-                    <router-link class="card-body" :to="{name: 'showDesk', params: {deskId: desk.id}}">
-                        <h4 class="card-title">{{desk.name}}</h4>
+                    <router-link class="card-body" v-bind:to="{name: 'showDesk', params: {deskId: desk.id}}">
+                        <h4 class="card-title">{{ desk.name }}</h4>
                     </router-link>
+                    <button type="button" class="btn btn-danger" v-on:click="deleteDesk(desk.id)">Удалить</button>
                 </div>
             </div>
         </div>
@@ -28,18 +29,41 @@ export default {
             loading: true,
         }
     },
+    methods: {
+        getAllDesks() {
+            axios.get('/api/V1/desks')
+                .then(response => {
+                    this.desks = response.data.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.errored = true;
+                })
+                .finally(() => {
+                    this.loading = false;
+                });
+        },
+        deleteDesk(id) {
+            if (confirm('Вы действительно хотите удалить доску и содержащиесе в ней карточки с задачами?')) {
+                axios.post('/api/V1/desks/' + id, {
+                    _method: 'DELETE',
+                })
+                    .then(response => {
+                        this.desks = [];
+                        this.getAllDesks();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    });
+            }
+        },
+    },
     mounted() {
-        axios.get('/api/V1/desks')
-        .then(response => {
-            this.desks = response.data.data;
-        })
-        .catch(error => {
-            console.log(error);
-            this.errored = true;
-        })
-        .finally(() => {
-            this.loading = false;
-        });
+        this.getAllDesks();
     },
 }
 </script>
