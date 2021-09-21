@@ -16,7 +16,7 @@ class DeskController extends BaseController
     public function index()
     {
         //ресурс выбирает только необходимые поля
-        return DeskResource::collection(Desk::all());
+        return DeskResource::collection(Desk::orderBy('created_at', 'desc')->get());
     }
 
     /**

@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         <div class="form-group">
-            <input type="text" v-on:blur="saveName" class="form-control mt-3" v-model="name" v-bind:class="{ 'is-invalid': $v.name.$error }">
+            <input type="text" v-on:blur="saveName" class="form-control mt-3" v-model="name"
+                   v-bind:class="{ 'is-invalid': $v.name.$error }">
             <div class="invalid-feedback" v-if="!$v.name.required">
                 Поле не может быть пустым.
             </div>
@@ -35,7 +36,7 @@ export default {
     methods: {
         saveName() {
             this.$v.$touch();
-            if (this.$v.$anyError()) {
+            if (this.$v.$anyError) {
                 return;
             }
             axios.post('/api/V1/desks/' + this.deskId, {

@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Desk whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Desk whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DeskList[] $lists
+ * @property-read int|null $lists_count
  */
 class Desk extends Model
 {
