@@ -48,7 +48,7 @@ export default {
         }
     },
     methods: {
-        getAllDesks() {
+        getDesks() {
             axios.get('/api/V1/desks')
                 .then(response => {
                     this.desks = response.data.data;
@@ -68,7 +68,7 @@ export default {
                 })
                     .then(response => {
                         this.desks = [];
-                        this.getAllDesks();
+                        this.getDesks();
                     })
                     .catch(error => {
                         console.log(error);
@@ -90,7 +90,7 @@ export default {
                 .then(response => {
                     this.desks = [];
                     this.name = '';
-                    this.getAllDesks();
+                    this.getDesks();
                 })
                 .catch(error => {
                     console.log(error);
@@ -106,7 +106,7 @@ export default {
         },
     },
     mounted() {
-        this.getAllDesks();
+        this.getDesks();
     },
     validations: {
         name: {

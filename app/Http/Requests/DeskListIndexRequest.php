@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeskStoreRequest extends FormRequest
+class DeskListIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,7 @@ class DeskStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|unique:desks,name,' . $this->desk->id,
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'name.unique' => 'Имя доски должно быть уникальным.',
+            'desk_id' => 'required|integer|exists:desks,id',
         ];
     }
 }

@@ -22,6 +22,7 @@ Route::namespace('Api\\V1')
     ->prefix('V1')
     ->group(function () {
     Route::apiResources([
-        'desks' => 'DeskController'
+        'desks' => 'DeskController',
+        'desk_lists' => 'DeskListController',
     ]);
 });
